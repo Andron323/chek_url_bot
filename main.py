@@ -1,7 +1,7 @@
 import constants
 import telebot
 import requests
-from bs4 import BeautifulSoup as BS
+from bs4 import BeautifulSoup
 import sched
 import time
 
@@ -64,7 +64,7 @@ def handle_commanddd(message):
                         f.close()
                         try:
                             r = requests.get("https://play.google.com/store/search?q=" + str(x))
-                            html = BS(r.content, "html.parser")
+                            html = BeautifulSoup(r.content, "html.parser")
                         except Exception as e:
                             print(e)
                             print("Совпадений нет,проверте правильность введения названия")
@@ -205,7 +205,7 @@ def chek_app(message):
         name_of_app = message.text
         try:
             r = requests.get("https://play.google.com/store/search?q=" + str(name_of_app))
-            html = BS(r.content, "html.parser")
+            html = BeautifulSoup(r.content, "html.parser")
         except Exception as e:
             print(e)
             print("Совпадений нет,проверте правильность введения названия")
