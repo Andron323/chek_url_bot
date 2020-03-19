@@ -1,0 +1,2 @@
+token = "879885918:AAFcaYaYBtSHM6kNNU3XACCnSKW9J39UZZI"
+pas = 'opamil'
