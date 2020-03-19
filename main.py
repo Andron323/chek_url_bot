@@ -43,7 +43,7 @@ def handle_commanddd(message):
     if message.chat.id not in id:
         bot.send_message(message.chat.id, "У вас нет доступа к данному боту\n"
                                           "Обратитесь к разработчику\n"
-                                          "@andron323 и сообщите ваш ID:\n")
+                                          "@andron3239 и сообщите ваш ID:\n")
         bot.send_message(message.chat.id, message.chat.id)
     else:
         bot.send_message(message.chat.id, "Начнем работу!")
@@ -165,7 +165,7 @@ def handle_command(message):
     if message.chat.id not in id:
         bot.send_message(message.chat.id, "У вас нет доступа к данному боту\n"
                                           "Обратитесь к разработчику\n"
-                                          "@andron323 и сообщите ваш ID:\n")
+                                          "@andron3239 и сообщите ваш ID:\n")
         bot.send_message(message.chat.id, message.chat.id)
     else:
         sent = bot.send_message(message.chat.id, 'Введите название приложения учитывая реристры и специальные знаки!')
@@ -187,7 +187,7 @@ def handle_command(message):
     if message.chat.id not in id:
         bot.send_message(message.chat.id, "У вас нет доступа к данному боту\n"
                                           "Обратитесь к разработчику\n"
-                                          "@andron323 и сообщите ваш ID:\n")
+                                          "@andron3239 и сообщите ваш ID:\n")
         bot.send_message(message.chat.id, message.chat.id)
     else:
         sent = bot.send_message(message.chat.id, 'Я проверю это приложение один раз в реальном времени\n'
@@ -244,7 +244,7 @@ def handle_command(message):
     if message.chat.id not in id:
         bot.send_message(message.chat.id, "У вас нет доступа к данному боту\n"
                                           "Обратитесь к разработчику\n"
-                                          "@andron323 и сообщите ваш ID:\n")
+                                          "@andron3239 и сообщите ваш ID:\n")
         bot.send_message(message.chat.id, message.chat.id)
     else:
         try:
@@ -264,7 +264,7 @@ def handle_command(message):
     if message.chat.id not in id:
         bot.send_message(message.chat.id, "У вас нет доступа к данному боту\n"
                                           "Обратитесь к разработчику\n"
-                                          "@andron323 и сообщите ваш ID:\n")
+                                          "@andron3239 и сообщите ваш ID:\n")
         bot.send_message(message.chat.id, message.chat.id)
     else:
         try:
