@@ -40,6 +40,12 @@ def handle_commanddd(message):
     user_markup.row("/addapp", "/dellapp")
     user_markup.row("/chekapp", "/seemyapps")
     bot.send_message(message.chat.id, "Привет!", reply_markup=user_markup)
+    try:
+        file = open(str(message.chat.id) + "problem.txt")
+    except Exception as e:
+        print(e)
+        kreate = open(str(message.chat.id) + 'problem.txt', 'tw', encoding='utf-8')
+        kreate.close()
     if message.chat.id not in id:
         bot.send_message(message.chat.id, "У вас нет доступа к данному боту\n"
                                           "Обратитесь к разработчику\n"
@@ -51,12 +57,12 @@ def handle_commanddd(message):
         def do_my_cod(sc):
             try:
                 print("Doing")
-                list_of_apps = open('problem.txt', 'r').readlines()
+                list_of_apps = open(str(message.chat.id) + 'problem.txt', 'r').readlines()
                 leng = len(list_of_apps)
                 print(leng)
                 list_of_apps.clear()
                 for nambers in range(leng):
-                    with open('problem.txt', 'r') as f:
+                    with open(str(message.chat.id) + 'problem.txt', 'r') as f:
                         for i in range(int(nambers)):
                             f.readline()
                         x = f.readline()
@@ -89,10 +95,10 @@ def handle_commanddd(message):
                             bot.send_message(message.chat.id, "........Приложение удалено!........")
                             bot.send_message(message.chat.id, "........Удаляю приложение с базы........")
                             try:
-                                with open('problem.txt', 'r') as o:
+                                with open(str(message.chat.id) + 'problem.txt', 'r') as o:
                                     data = o.readlines()
                                 data = filter(lambda line: x not in line, data)
-                                with open('problem.txt', 'w') as o:
+                                with open(str(message.chat.id) + 'problem.txt', 'w') as o:
                                     o.write("".join(data))
                                     bot.send_message(message.chat.id, "Приложение успешно удалено!")
                                     bot.send_message(message.chat.id, x)
@@ -127,9 +133,9 @@ def handle_commanddd(message):
                 print("........Критическая ошибка при проверки, обратитесь в плоддержку........ " + x)
                 bot.send_message(message.chat.id,
                                  "........Критическая ошибка при проверки, обратитесь в плоддержку........")
-            s.enter(15, 1, do_my_cod, (sc,))
+            s.enter(10, 1, do_my_cod, (sc,))
 
-        s.enter(15, 1, do_my_cod, (s,))
+        s.enter(10, 1, do_my_cod, (s,))
         s.run()
 
 
@@ -174,7 +180,7 @@ def handle_command(message):
 
 def hello(message):
     try:
-        open('problem.txt', 'a').write(message.text + "\n")
+        open(str(message.chat.id) + 'problem.txt', 'a').write(message.text + "\n")
         bot.send_message(message.chat.id, 'Приложение успешно добавлено!')
     except Exception as e:
         print(e)
@@ -199,7 +205,7 @@ def handle_command(message):
 
 def chek_app(message):
     try:
-        open('onetestapp.txt', 'w').write(message.text + "\n")
+        open(str(message.chat.id) + 'onetestapp.txt', 'w').write(message.text + "\n")
         bot.send_message(message.chat.id, 'Понял,обрабатываю'
                                           'Подожди немного!')
         name_of_app = message.text
@@ -248,7 +254,7 @@ def handle_command(message):
         bot.send_message(message.chat.id, message.chat.id)
     else:
         try:
-            list_of_apps = open('problem.txt', 'r').read()
+            list_of_apps = open(str(message.chat.id) + 'problem.txt', 'r').read()
             bot.send_message(message.chat.id, 'Понял,обрабатываю\n'
                                               'Подожди немного!\n')
             bot.send_message(message.chat.id, list_of_apps)
@@ -268,6 +274,12 @@ def handle_command(message):
         bot.send_message(message.chat.id, message.chat.id)
     else:
         try:
+            try:
+                file = open(str(message.chat.id) + "problem.txt")
+            except Exception as e:
+                print(e)
+                kreate = open(str(message.chat.id) + 'problem.txt', 'tw', encoding='utf-8')
+                kreate.close()
             sent = bot.send_message(message.chat.id,
                                     'Введите название приложения учитывая реристры и специальные знаки!\n\n'
                                     '                Внимание!!! \n'
@@ -284,10 +296,10 @@ def handle_command(message):
 
 def enter_app_to_dell(message):
     try:
-        with open('problem.txt', 'r') as f:
+        with open(str(message.chat.id) + 'problem.txt', 'r') as f:
             data = f.readlines()
         data = filter(lambda line: message.text not in line, data)
-        with open('problem.txt', 'w') as f:
+        with open(str(message.chat.id) + 'problem.txt', 'w') as f:
             f.write("".join(data))
             bot.send_message(message.chat.id, "Приложение успешно удалено!")
     except Exception as e:
