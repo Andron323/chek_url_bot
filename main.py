@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import sched
 import time
+# import threading
 
 # proxies = {
 #     "http": "http://10.10.1.10:3128",
@@ -14,7 +15,7 @@ import time
 
 id = []
 # 398051266
-
+cheker = 0
 bot = telebot.TeleBot(constants.token)
 
 # try:
@@ -30,7 +31,22 @@ bot = telebot.TeleBot(constants.token)
 #     id.append(users)
 #     print(users)
 
+
 s = sched.scheduler(time.time, time.sleep)
+
+
+# def thread(my_func):
+#     def wrapper(*args, **kwargs):
+#         my_thread = threading.Thread(target=my_func, args=args, kwargs=kwargs, daemon=True)
+#         my_thread.start()
+#
+#     return wrapper
+#
+#
+# @thread
+# def go(nomer):
+#     for x in range(1, 200):
+#         print("Поток номер" + str(nomer) + "число" + str(x) + "\n")
 
 
 @bot.message_handler(commands=["start"])
@@ -56,11 +72,14 @@ def handle_commanddd(message):
 
         def do_my_cod(sc):
             try:
-                print("Doing")
+                print("Doing ", message.chat.id)
                 list_of_apps = open(str(message.chat.id) + 'problem.txt', 'r').readlines()
                 leng = len(list_of_apps)
                 print(leng)
-                list_of_apps.clear()
+                # if leng == 0:
+                #     print("Список пуст,я жду")
+                # else:
+                # list_of_apps.clear() не помню зачем надо
                 for nambers in range(leng):
                     with open(str(message.chat.id) + 'problem.txt', 'r') as f:
                         for i in range(int(nambers)):
@@ -71,8 +90,8 @@ def handle_commanddd(message):
                         try:
                             r = requests.get("https://play.google.com/store/search?q=" + str(x))
                             html = BeautifulSoup(r.content, "html.parser")
-                        except Exception as e:
-                            print(e)
+                        except Exception as e2:
+                            print(e2)
                             print("Совпадений нет,проверте правильность введения названия")
                             # bot.send_message(message.chat.id, "Совпадений нет,проверте правильность введения названия")
                         n = 0
@@ -89,8 +108,8 @@ def handle_commanddd(message):
                         print(mass)
                         try:
                             namber_of_el = mass.index(str(x))
-                        except Exception as e:
-                            print(e)
+                        except Exception as e2:
+                            print(e2)
                             print("........Приложение удалено!........ ", x)
                             bot.send_message(message.chat.id, "........Приложение удалено!........")
                             bot.send_message(message.chat.id, "........Удаляю приложение с базы........")
@@ -102,40 +121,40 @@ def handle_commanddd(message):
                                     o.write("".join(data))
                                     bot.send_message(message.chat.id, "Приложение успешно удалено!")
                                     bot.send_message(message.chat.id, x)
-                            except Exception as e:
-                                print(e)
+                            except Exception as e2:
+                                print(e2)
                                 print("........Ошибка,удаления, проверте правильность ввода........")
                                 bot.send_message(message.chat.id,
                                                  "........Ошибка,удаления, проверте правильность ввода........")
 
                         try:
                             print(mass[int(namber_of_el)], " Элемент под этим номером")
-                        except Exception as e:
-                            print(e)
-                            print("........Ошибка,проверки приложений, Google Play ничего не нашел ........ ", x)
+                        except Exception as e2:
+                            print(e2)
+                            print("........Google Play ничего не нашел ........ ", x)
                             bot.send_message(message.chat.id,
-                                             "........Ошибка,проверки приложений, Google Play ничего не "
+                                             "........Google Play ничего не "
                                              "нашел........")
                         try:
                             if mass[int(namber_of_el)] == str(x):
                                 print("........Нашел приложение!........ ", x)
-                                bot.send_message(message.chat.id, "........Нашел приложение!........")
-                                bot.send_message(message.chat.id, x)
+                                # bot.send_message(message.chat.id, "........Нашел приложение!........")
+                                # bot.send_message(message.chat.id, x)
                             # print(massiv.count(str(name_of_app)))
-                        except Exception as e:
-                            print(e)
+                        except Exception as e1:
+                            print(e1)
                             print("........Скорей всего оно удалено ........ ", x)
                             bot.send_message(message.chat.id,
-                                             "........Ошибка,проверки приложений, Google Play ничего не "
-                                             "нашел........")
-            except Exception as e:
-                print(e)
-                print("........Критическая ошибка при проверки, обратитесь в плоддержку........ " + x)
+                                             "........Скорей всего оно удалено........")
+                            bot.send_message(message.chat.id, x)
+            except Exception as e2:
+                print(e2)
+                print("........Критическая ошибка при проверки, обратитесь в поддержку........ " + x)
                 bot.send_message(message.chat.id,
-                                 "........Критическая ошибка при проверки, обратитесь в плоддержку........")
-            s.enter(10, 1, do_my_cod, (sc,))
+                                 "........Критическая ошибка при проверки, обратитесь в поддержку........")
+            s.enter(600, 1, do_my_cod, (sc,))
 
-        s.enter(10, 1, do_my_cod, (s,))
+        s.enter(600, 1, do_my_cod, (s,))
         s.run()
 
 
@@ -190,6 +209,12 @@ def hello(message):
 
 @bot.message_handler(commands=["chekapp"])
 def handle_command(message):
+    try:
+        file = open(str(message.chat.id) + 'onetestapp.txt')
+    except Exception as e:
+        print(e)
+        kreate = open(str(message.chat.id) + 'onetestapp.txt', 'tw', encoding='utf-8')
+        kreate.close()
     if message.chat.id not in id:
         bot.send_message(message.chat.id, "У вас нет доступа к данному боту\n"
                                           "Обратитесь к разработчику\n"
