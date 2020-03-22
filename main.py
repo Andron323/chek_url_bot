@@ -1,9 +1,12 @@
+from timeit import Timer
+
 import constants
 import telebot
 import requests
 from bs4 import BeautifulSoup
 import sched
 import time
+import threading
 # import threading
 
 # proxies = {
@@ -13,7 +16,7 @@ import time
 #
 # requests.get("http://www.google.com/", proxies=proxies)
 
-id = []
+id = [244920844, 398051266]
 # 398051266
 cheker = 0
 bot = telebot.TeleBot(constants.token)
@@ -70,7 +73,9 @@ def handle_commanddd(message):
     else:
         bot.send_message(message.chat.id, "Начнем работу!")
 
-        def do_my_cod(sc):
+        # def do_my_cod(sc):
+        def do_my_cod():
+            threading.Timer(600.0, do_my_cod).start()
             try:
                 print("Doing ", message.chat.id)
                 list_of_apps = open(str(message.chat.id) + 'problem.txt', 'r').readlines()
@@ -138,8 +143,8 @@ def handle_commanddd(message):
                         try:
                             if mass[int(namber_of_el)] == str(x):
                                 print("........Нашел приложение!........ ", x)
-                                # bot.send_message(message.chat.id, "........Нашел приложение!........")
-                                # bot.send_message(message.chat.id, x)
+                                bot.send_message(message.chat.id, "........Нашел приложение!........")
+                                bot.send_message(message.chat.id, x)
                             # print(massiv.count(str(name_of_app)))
                         except Exception as e1:
                             print(e1)
@@ -152,10 +157,12 @@ def handle_commanddd(message):
                 print("........Критическая ошибка при проверки, обратитесь в поддержку........ " + x)
                 bot.send_message(message.chat.id,
                                  "........Критическая ошибка при проверки, обратитесь в поддержку........")
-            s.enter(600, 1, do_my_cod, (sc,))
+            # s.enter(15, 1, do_my_cod, (sc,))
+        do_my_cod()
 
-        s.enter(600, 1, do_my_cod, (s,))
-        s.run()
+        # t = Timer(10.0, do_my_cod)
+        # s.enter(15, 1, do_my_cod, (s,))
+        # s.run()
 
 
 # @bot.message_handler(commands=["stop"])
