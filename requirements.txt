@@ -13,3 +13,5 @@ six==1.14.0
 tornado==6.0.4
 urllib3==1.25.8
 beautifulsoup4==4.8.2
+mysql-connector-python==8.0.19
+
