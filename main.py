@@ -219,7 +219,7 @@ def handle_commanddd(message):
         bot.send_message(message.chat.id, "Начнем работу!")
 
         def chek_data():
-            threading.Timer(15.0, chek_data).start()
+            threading.Timer(3600.0, chek_data).start()
             print("Работает")
 
             now2 = datetime.datetime.now()
@@ -351,7 +351,7 @@ def handle_commanddd(message):
 
         # def do_my_cod(sc):
         def do_my_cod():
-            threading.Timer(15.0, do_my_cod).start()
+            threading.Timer(600.0, do_my_cod).start()
             try:
                 lenf = sum(1 for line in open(str(message.chat.id) + 'problem.txt', 'r'))
             except Exception as e:
