@@ -16,11 +16,11 @@ print("Текущий месяц: %d" % now_month)
 print("Текущий день: %d" % now_day)
 
 db = mysql.connector.connect(
-    host="127.0.0.1",
-    user="root",
-    passwd="1111",
+    host="q2gen47hi68k1yrb.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
+    user="uhp2akgrjai1lsv8",
+    passwd="y7cpjphmw5ezqfuc",
     port="3306",
-    database="users"
+    database="sfal0cex1w41dpl8"
 )
 print(db)
 cursor = db.cursor()
