@@ -198,7 +198,6 @@ def handle_commanddd(message):
     user_markup.row("✅ ДОБАВИТЬ", "❌ УДАЛИТЬ")
     user_markup.row("✍🏻 ВРУЧНУЮ", "📖 СПИСОК")
     user_markup.row("👑 ТАРИФЫ", "🛎 ПОДДЕРЖКА")
-    user_markup.row("/admin", "/start")
     bot.send_message(message.chat.id, "Привет!", reply_markup=user_markup)
     try:
         file = open(str(message.chat.id) + "problem.txt")
