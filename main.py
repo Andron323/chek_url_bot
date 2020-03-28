@@ -15,15 +15,19 @@ now_day = now.day
 print("Текущий месяц: %d" % now_month)
 print("Текущий день: %d" % now_day)
 
-db = mysql.connector.connect(
-    host="q2gen47hi68k1yrb.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
-    user="uhp2akgrjai1lsv8",
-    passwd="y7cpjphmw5ezqfuc",
-    port="3306",
-    database="sfal0cex1w41dpl8"
-)
-print(db)
-cursor = db.cursor()
+try:
+    db = mysql.connector.connect(
+        host="q2gen47hi68k1yrb.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
+        user="c9kzrp54gugddf8t",
+        passwd="p10cuqs2t9if3qzq",
+        port="3306",
+        database="d75zrxilopfztmgu"
+    )
+    print(db)
+    cursor = db.cursor()
+except Exception as e:
+    print(e)
+    print("Ошибка подключения к базе данных")
 # cursor.execute("CREATE DATABASE users")
 
 # cursor.execute("SHOW DATABASES")
@@ -60,34 +64,39 @@ id = []
 status = []
 day_off = []
 
-cursor.execute("SELECT * FROM user")
-result = cursor.fetchall()
-for x in result:
-    print(x)
 
-cursor.execute("SELECT id_user FROM user")
-result = cursor.fetchall()
-id.clear()
-for x in result:
-    print(x)
-    id.append(x)
-print(id)
+try:
+    cursor.execute("SELECT * FROM user")
+    result = cursor.fetchall()
+    for x in result:
+        print(x)
 
-cursor.execute("SELECT status FROM user")
-result = cursor.fetchall()
-status.clear()
-for x in result:
-    # print(x)
-    status.append(x)
-print(status)
+    cursor.execute("SELECT id_user FROM user")
+    result = cursor.fetchall()
+    id.clear()
+    for x in result:
+        print(x)
+        id.append(x)
+    print(id)
 
-cursor.execute("SELECT offtime FROM user")
-result = cursor.fetchall()
-day_off.clear()
-for x in result:
-    # print(x)
-    day_off.append(x)
-print(day_off)
+    cursor.execute("SELECT status FROM user")
+    result = cursor.fetchall()
+    status.clear()
+    for x in result:
+        # print(x)
+        status.append(x)
+    print(status)
+
+    cursor.execute("SELECT offtime FROM user")
+    result = cursor.fetchall()
+    day_off.clear()
+    for x in result:
+        # print(x)
+        day_off.append(x)
+    print(day_off)
+except Exception as e:
+    print(e)
+    print("Ошибка выбора элементов с базы данных(перед старт)")
 # proxies = {
 #     "http": "http://10.10.1.10:3128",
 #     "https": "http://10.10.1.10:1080",
@@ -153,34 +162,38 @@ def handle_commanddd(message):
         print(e)
         print("Пользователь уже существует")
 
-    cursor.execute("SELECT * FROM user")
-    result = cursor.fetchall()
-    for x in result:
-        print(x)
+    try:
+        cursor.execute("SELECT * FROM user")
+        result = cursor.fetchall()
+        for x in result:
+            print(x)
 
-    cursor.execute("SELECT id_user FROM user")
-    result = cursor.fetchall()
-    id.clear()
-    for x in result:
-        # print(x)
-        id.append(x)
-    print(id)
+        cursor.execute("SELECT id_user FROM user")
+        result = cursor.fetchall()
+        id.clear()
+        for x in result:
+            # print(x)
+            id.append(x)
+        print(id)
 
-    cursor.execute("SELECT status FROM user")
-    result = cursor.fetchall()
-    status.clear()
-    for x in result:
-        # print(x)
-        status.append(x)
-    print(status)
+        cursor.execute("SELECT status FROM user")
+        result = cursor.fetchall()
+        status.clear()
+        for x in result:
+            # print(x)
+            status.append(x)
+        print(status)
 
-    cursor.execute("SELECT offtime FROM user")
-    result = cursor.fetchall()
-    day_off.clear()
-    for x in result:
-        # print(x)
-        day_off.append(x)
-    print(day_off)
+        cursor.execute("SELECT offtime FROM user")
+        result = cursor.fetchall()
+        day_off.clear()
+        for x in result:
+            # print(x)
+            day_off.append(x)
+        print(day_off)
+    except Exception as e:
+        print(e)
+        print("Ошибка выбора элементов с базы данных")
     user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
     user_markup.row("✅ ДОБАВИТЬ", "❌ УДАЛИТЬ")
     user_markup.row("✍🏻 ВРУЧНУЮ", "📖 СПИСОК")
@@ -217,51 +230,59 @@ def handle_commanddd(message):
             now_day2 = now2.day
 
             nomber = 0
-            cursor.execute("SELECT id_user FROM user")
-            result = cursor.fetchall()
-            id.clear()
-            r = 0
-            for x in result:
-                r = r + 1
-                # print(x)
-                if str(x) == str(chen_id):
-                    nomber = (r - 1)
-                id.append(x)
-            print(id)
-            print(nomber, "nomber for data in mas")
+            try:
+                cursor.execute("SELECT id_user FROM user")
+                result = cursor.fetchall()
+                id.clear()
+                r = 0
+                for x in result:
+                    r = r + 1
+                    # print(x)
+                    if str(x) == str(chen_id):
+                        nomber = (r - 1)
+                    id.append(x)
+                print(id)
+                print(nomber, "nomber for data in mas")
 
-            cursor.execute("SELECT offtime FROM user")
-            result = cursor.fetchall()
-            day_off.clear()
-            for x in result:
-                # print(x)
-                day_off.append(x)
-            print(day_off)
-            global  do_kogda
-            do_kogda = day_off[int(nomber)]
-            lenf = sum(1 for line in open(str(message.chat.id) + 'problem.txt', 'r'))
+                cursor.execute("SELECT offtime FROM user")
+                result = cursor.fetchall()
+                day_off.clear()
+                for x in result:
+                    # print(x)
+                    day_off.append(x)
+                print(day_off)
+                global  do_kogda
+                do_kogda = day_off[int(nomber)]
+                lenf = sum(1 for line in open(str(message.chat.id) + 'problem.txt', 'r'))
 
-            cursor.execute("SELECT status FROM user")
-            result = cursor.fetchall()
-            status.clear()
-            for x in result:
-                # print(x)
-                status.append(x)
-            print(status, "status")
-            global now_status2
-            now_status2 = status[int(nomber)]
-            print(now_status2, "now_status")
+                cursor.execute("SELECT status FROM user")
+                result = cursor.fetchall()
+                status.clear()
+                for x in result:
+                    # print(x)
+                    status.append(x)
+                print(status, "status")
+                global now_status2
+                now_status2 = status[int(nomber)]
+                print(now_status2, "now_status")
+            except Exception as e:
+                print(e)
+                print("Ошибка выбора элементов с базы данных(при ежедневной проверке)")
 
             print(int(lenf))
             print(str(do_kogda))
             print(str("(" + str(now_day) + ",)"))
             if int(lenf) > 1 and str(do_kogda) == str("(" + str(now_day2) + ",)"):
 
-                sql = "UPDATE user SET status = %s WHERE offtime = %s"
-                val = ("0", str(now_day2))
-                cursor.execute(sql, val)
-                db.commit()
-                print(cursor.rowcount, "record(s) affected")
+                try:
+                    sql = "UPDATE user SET status = %s WHERE offtime = %s"
+                    val = ("0", str(now_day2))
+                    cursor.execute(sql, val)
+                    db.commit()
+                    print(cursor.rowcount, "record(s) affected")
+                except Exception as e:
+                    print(e)
+                    print("Ошибка обновления данных в бд")
 
                 bot.send_message(message.chat.id, "У вас закончилось время действия тарифа\n"
                                                   "Продлите его или же удалите приложения\n"
@@ -272,11 +293,15 @@ def handle_commanddd(message):
                                                   "👑 ТАРИФЫ\n")
             elif str(do_kogda) == str("(" + str(now_day2) + ",)"):
 
-                sql = "UPDATE user SET status = %s WHERE offtime = %s"
-                val = ("0", str(now_day2))
-                cursor.execute(sql, val)
-                db.commit()
-                print(cursor.rowcount, "record(s) affected")
+                try:
+                    sql1 = "UPDATE user SET status = %s WHERE offtime = %s"
+                    val1 = ("0", str(now_day2))
+                    cursor.execute(sql1, val1)
+                    db.commit()
+                    print(cursor.rowcount, "record(s) affected")
+                except Exception as e:
+                    print(e)
+                    print("Ошибка обновления данных в бд")
                 bot.send_message(message.chat.id, "У вас закончилось время действия тарифа\n"
                                                   "Продлите его или же удалите приложения\n"
                                                   "с листа проверок до разрешенного количества\n"
@@ -328,7 +353,11 @@ def handle_commanddd(message):
         # def do_my_cod(sc):
         def do_my_cod():
             threading.Timer(15.0, do_my_cod).start()
-            lenf = sum(1 for line in open(str(message.chat.id) + 'problem.txt', 'r'))
+            try:
+                lenf = sum(1 for line in open(str(message.chat.id) + 'problem.txt', 'r'))
+            except Exception as e:
+                print(e)
+                print("Ошибка доступа к файлу")
             if int(lenf) > 1 and str(do_kogda) == str("(" + str(now_day2) + ",)"):
                 print("Срок действия тарифа истек")
             elif now_status2 == (3,):
@@ -518,53 +547,57 @@ def handle_command(message):
                                               "@andron3239 и сообщите ваш ID:\n")
             bot.send_message(message.chat.id, message.chat.id)
         else:
-            nomber = 0
-            cursor.execute("SELECT id_user FROM user")
-            result = cursor.fetchall()
-            id.clear()
-            r = 0
-            for x in result:
-                r = r + 1
-                # print(x)
-                if str(x) == str(chen_id):
-                    nomber = (r - 1)
-                id.append(x)
-            print(id)
-            print(nomber, "nomber for status in mas")
+            try:
+                nomber = 0
+                cursor.execute("SELECT id_user FROM user")
+                result = cursor.fetchall()
+                id.clear()
+                r = 0
+                for x in result:
+                    r = r + 1
+                    # print(x)
+                    if str(x) == str(chen_id):
+                        nomber = (r - 1)
+                    id.append(x)
+                print(id)
+                print(nomber, "nomber for status in mas")
 
-            cursor.execute("SELECT status FROM user")
-            result = cursor.fetchall()
-            status.clear()
-            for x in result:
-                # print(x)
-                status.append(x)
-            print(status, "status")
-            global now_status
-            now_status = status[int(nomber)]
-            print(now_status, "now_status")
-            lenf = sum(1 for line in open(str(message.chat.id) + 'problem.txt', 'r'))
-            print(lenf, "lenf")
-            if now_status == (3,):
-                sent = bot.send_message(message.chat.id,
-                                        'Введите название приложения учитывая реристры и специальные знаки!')
-                bot.register_next_step_handler(sent, hello)
-            elif now_status == (2,) and lenf <= 9:
-                sent = bot.send_message(message.chat.id,
-                                        'Введите название приложения учитывая реристры и специальные знаки!')
-                bot.register_next_step_handler(sent, hello)
-            elif now_status == (1,) and lenf <= 4:
-                sent = bot.send_message(message.chat.id,
-                                        'Введите название приложения учитывая реристры и специальные знаки!')
-                bot.register_next_step_handler(sent, hello)
-            elif now_status == (0,) and lenf <= 0:
-                sent = bot.send_message(message.chat.id,
-                                        'Введите название приложения учитывая реристры и специальные знаки!')
-                bot.register_next_step_handler(sent, hello)
-            else:
-                bot.send_message(message.chat.id,
-                                 'Вы исчерпали доступное количество мест в списке приложений\n'
-                                 'Перейдите в пункт "👑 ТАРИФЫ" в главном меню \n'
-                                 'и закажите новый тариф или тариф более высокого уровня \n')
+                cursor.execute("SELECT status FROM user")
+                result = cursor.fetchall()
+                status.clear()
+                for x in result:
+                    # print(x)
+                    status.append(x)
+                print(status, "status")
+                global now_status
+                now_status = status[int(nomber)]
+                print(now_status, "now_status")
+                lenf = sum(1 for line in open(str(message.chat.id) + 'problem.txt', 'r'))
+                print(lenf, "lenf")
+                if now_status == (3,):
+                    sent = bot.send_message(message.chat.id,
+                                            'Введите название приложения учитывая реристры и специальные знаки!')
+                    bot.register_next_step_handler(sent, hello)
+                elif now_status == (2,) and lenf <= 9:
+                    sent = bot.send_message(message.chat.id,
+                                            'Введите название приложения учитывая реристры и специальные знаки!')
+                    bot.register_next_step_handler(sent, hello)
+                elif now_status == (1,) and lenf <= 4:
+                    sent = bot.send_message(message.chat.id,
+                                            'Введите название приложения учитывая реристры и специальные знаки!')
+                    bot.register_next_step_handler(sent, hello)
+                elif now_status == (0,) and lenf <= 0:
+                    sent = bot.send_message(message.chat.id,
+                                            'Введите название приложения учитывая реристры и специальные знаки!')
+                    bot.register_next_step_handler(sent, hello)
+                else:
+                    bot.send_message(message.chat.id,
+                                     'Вы исчерпали доступное количество мест в списке приложений\n'
+                                     'Перейдите в пункт "👑 ТАРИФЫ" в главном меню \n'
+                                     'и закажите новый тариф или тариф более высокого уровня \n')
+            except Exception as e:
+                print(e)
+                print("Ошибка обращения к бд")
     elif message.text == "✍🏻 ВРУЧНУЮ":
         try:
             file = open(str(message.chat.id) + 'onetestapp.txt')
@@ -633,28 +666,42 @@ def handle_command(message):
     elif message.text == "👑 ТАРИФЫ":
         chen_id = "(" + str(message.chat.id) + ",)"
         nomber = 0
-        cursor.execute("SELECT id_user FROM user")
-        result = cursor.fetchall()
-        id.clear()
-        r = 0
-        for x in result:
-            r = r + 1
-            # print(x)
-            if str(x) == str(chen_id):
-                nomber = (r - 1)
-            id.append(x)
-        print(id)
-        print(nomber, "nomber for status in mas")
+        try:
+            cursor.execute("SELECT id_user FROM user")
+            result = cursor.fetchall()
+            id.clear()
+            r = 0
+            for x in result:
+                r = r + 1
+                # print(x)
+                if str(x) == str(chen_id):
+                    nomber = (r - 1)
+                id.append(x)
+            print(id)
+            print(nomber, "nomber for status in mas")
 
-        cursor.execute("SELECT status FROM user")
-        result = cursor.fetchall()
-        status.clear()
-        for x in result:
-            # print(x)
-            status.append(x)
-        print(status, "status")
+            cursor.execute("SELECT status FROM user")
+            result = cursor.fetchall()
+            status.clear()
+            for x in result:
+                # print(x)
+                status.append(x)
+            print(status, "status")
+
+            cursor.execute("SELECT offtime FROM user")
+            result = cursor.fetchall()
+            day_off.clear()
+            for x in result:
+                # print(x)
+                day_off.append(x)
+            print(day_off)
+        except Exception as e:
+            print(e)
+            print("Ошибка обращения к бд")
         now_status = status[int(nomber)]
+        off_data = day_off[int(nomber)]
         print(now_status, "now_status")
+        print(off_data, "off_data")
         if now_status == (3,):
             now_status = 3
         if now_status == (2,):
@@ -663,8 +710,11 @@ def handle_command(message):
             now_status = 1
         if now_status == (0,):
             now_status = 0
+        if off_data == (0,):
+            off_data = "Бессрочно"
         bot.send_message(message.chat.id, "Привет!\n"
-                                          f'Ваш текущий тариф: {now_status}'
+                                          f'Ваш текущий тариф: {now_status}\n'
+                                          f'Действует до: {off_data}\n'
                                           "\nДля потльзования этим ботом, вы должны выбрать один из тарифов: \n"
                                           "\n"
                                           "0 - ОБЫЧНЫЙ: Бесплатно, отслеживание\n"
