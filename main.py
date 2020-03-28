@@ -16,7 +16,7 @@ print("Текущий месяц: %d" % now_month)
 print("Текущий день: %d" % now_day)
 
 db = mysql.connector.connect(
-    host="localhost",
+    host="127.0.0.1",
     user="root",
     passwd="1111",
     port="3306",
