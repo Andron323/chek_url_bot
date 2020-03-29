@@ -18,16 +18,17 @@ print("Текущий день: %d" % now_day)
 try:
     db = mysql.connector.connect(
         host="q2gen47hi68k1yrb.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
-        user="c9kzrp54gugddf8t",
-        passwd="p10cuqs2t9if3qzq",
+        user="sftt638drm8psv1v",
+        passwd="ncshyhrvpqatr5xp",
         port="3306",
-        database="d75zrxilopfztmgu"
+        database="sx98ct5sc1nucpjd"
     )
     print(db)
     cursor = db.cursor()
 except Exception as e:
     print(e)
     print("Ошибка подключения к базе данных")
+
 # cursor.execute("CREATE DATABASE users")
 
 # cursor.execute("SHOW DATABASES")
@@ -67,6 +68,11 @@ day_off = []
 
 try:
     cursor.execute("SELECT * FROM user")
+    result = cursor.fetchall()
+    for x in result:
+        print(x)
+
+    cursor.execute("SELECT id FROM user")
     result = cursor.fetchall()
     for x in result:
         print(x)
@@ -152,14 +158,18 @@ bot = telebot.TeleBot(constants.token)
 # ----------------------------------------------------------------------------/start----------------------------------------------------------------------------------
 @bot.message_handler(commands=["start"])
 def handle_commanddd(message):
-    try:
-        sql = "INSERT INTO user (id_user, status, offtime) VALUES (%s, %s, %s)"
-        val = (message.chat.id, defalt_status, defalt_data)
-        cursor.execute(sql, val)
-        db.commit()
-        print(cursor.rowcount, "Запись добавена")
-    except Exception as e:
-        print(e)
+    chen_id_ = "(" + str(message.chat.id) + ",)"
+    if str(chen_id_) not in str(id):
+        try:
+            sql = "INSERT INTO user (id_user, status, offtime) VALUES (%s, %s, %s)"
+            val = (message.chat.id, defalt_status, defalt_data)
+            cursor.execute(sql, val)
+            db.commit()
+            print(cursor.rowcount, "Запись добавена")
+        except Exception as e:
+            print(e)
+            print("Пользователь уже существует")
+    else:
         print("Пользователь уже существует")
 
     try:
