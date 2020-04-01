@@ -15,13 +15,28 @@ now_day = now.day
 print("Текущий месяц: %d" % now_month)
 print("Текущий день: %d" % now_day)
 
+# try:
+#     db = mysql.connector.connect(
+#         host="q2gen47hi68k1yrb.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
+#         user="sftt638drm8psv1v",
+#         passwd="ncshyhrvpqatr5xp",
+#         port="3306",
+#         database="sx98ct5sc1nucpjd"
+#     )
+#     print(db)
+#     cursor = db.cursor()
+# except Exception as e:
+#     print(e)
+#     print("Ошибка подключения к базе данных")
+
+
 try:
     db = mysql.connector.connect(
-        host="q2gen47hi68k1yrb.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
-        user="sftt638drm8psv1v",
-        passwd="ncshyhrvpqatr5xp",
+        host="postige.mysql.tools",
+        user="postige_appbot",
+        passwd="X4cAi!f8!8",
         port="3306",
-        database="sx98ct5sc1nucpjd"
+        database="postige_appbot"
     )
     print(db)
     cursor = db.cursor()
@@ -224,7 +239,7 @@ def handle_commanddd(message):
         bot.send_message(message.chat.id, "Бот активен, приступим к работе")
 
         def chek_data():
-            threading.Timer(3600.0, chek_data).start()
+            threading.Timer(21600.0, chek_data).start()
             print("Работает")
 
             now2 = datetime.datetime.now()
