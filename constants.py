@@ -1,4 +1,2 @@
-token = "866467460:AAGpszaBN7vyBwvRsg-bnaAv1F11zIxBVyQ"
-# token = "879885918:AAFcaYaYBtSHM6kNNU3XACCnSKW9J39UZZI"
-# token = "1057920947:AAEYhElMNqgv5Phl372Z29evSKvZ4-VYuLA"
+token = "839904700:AAFkLpNcuP5JOY3FvgWbHqksAcsSbYx0CdI"
 pas = 'opamil'

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="882f9ede-b55e-4a8e-a25f-97a71df549b3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,10 +80,10 @@
     </state>
     <state x="552" y="182" key="#Inspections/0.0.1920.1046@0.0.1920.1046" timestamp="1584554436294" />
     <state x="552" y="183" key="#Inspections/0.0.1920.1050@0.0.1920.1050" timestamp="1585070090470" />
-    <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585585480597">
+    <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585824358252">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1585585480597" />
+    <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1585824358252" />
     <state x="614" y="119" key="CommitChangelistDialog2" timestamp="1584815858854">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -132,11 +133,11 @@
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1046@0.0.1920.1046" timestamp="1584637766926" />
     <state x="461" y="166" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1585049863160" />
-    <state x="656" y="348" key="com.intellij.ide.util.TipDialog" timestamp="1585737708384">
+    <state x="656" y="348" key="com.intellij.ide.util.TipDialog" timestamp="1585760216792">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="656" y="347" key="com.intellij.ide.util.TipDialog/0.0.1920.1046@0.0.1920.1046" timestamp="1584656184630" />
-    <state x="656" y="348" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1585737708384" />
+    <state x="656" y="348" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1585760216792" />
     <state x="769" y="441" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584815845289">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

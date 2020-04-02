@@ -15,6 +15,20 @@ now_day = now.day
 print("Текущий месяц: %d" % now_month)
 print("Текущий день: %d" % now_day)
 
+try:
+    db = mysql.connector.connect(
+        host="209.250.253.38",
+        user="gpbot_user",
+        passwd="DHUIEh#$4647",
+        port="3306",
+        database="gpbot_db"
+    )
+    print(db)
+    cursor = db.cursor()
+except Exception as e:
+    print(e)
+    print("Ошибка подключения к базе данных")
+
 # try:
 #     db = mysql.connector.connect(
 #         host="q2gen47hi68k1yrb.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
@@ -30,19 +44,22 @@ print("Текущий день: %d" % now_day)
 #     print("Ошибка подключения к базе данных")
 
 
-try:
-    db = mysql.connector.connect(
-        host="postige.mysql.tools",
-        user="postige_appbot",
-        passwd="X4cAi!f8!8",
-        port="3306",
-        database="postige_appbot"
-    )
-    print(db)
-    cursor = db.cursor()
-except Exception as e:
-    print(e)
-    print("Ошибка подключения к базе данных")
+
+# try:
+#     db = mysql.connector.connect(
+#         host="postige.mysql.tools",
+#         user="postige_appbot",
+#         passwd="X4cAi!f8!8",
+#         port="3306",
+#         database="postige_appbot"
+#     )
+#     print(db)
+#     cursor = db.cursor()
+# except Exception as e:
+#     print(e)
+#     print("Ошибка подключения к базе данных")
+
+
 
 # cursor.execute("CREATE DATABASE users")
 
@@ -127,7 +144,7 @@ except Exception as e:
 # 398051266
 
 global defalt_status
-defalt_status = 0
+defalt_status = 3
 global defalt_data
 defalt_data = 0
 
@@ -217,7 +234,6 @@ def handle_commanddd(message):
     user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
     user_markup.row("✅ ДОБАВИТЬ", "❌ УДАЛИТЬ")
     user_markup.row("✍🏻 ВРУЧНУЮ", "📖 СПИСОК")
-    user_markup.row("👑 ТАРИФЫ", "🛎 ПОДДЕРЖКА")
     bot.send_message(message.chat.id, "Привет!", reply_markup=user_markup)
     try:
         file = open(str(message.chat.id) + "problem.txt")
