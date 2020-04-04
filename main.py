@@ -29,37 +29,6 @@ except Exception as e:
     print(e)
     print("Ошибка подключения к базе данных")
 
-# try:
-#     db = mysql.connector.connect(
-#         host="q2gen47hi68k1yrb.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
-#         user="sftt638drm8psv1v",
-#         passwd="ncshyhrvpqatr5xp",
-#         port="3306",
-#         database="sx98ct5sc1nucpjd"
-#     )
-#     print(db)
-#     cursor = db.cursor()
-# except Exception as e:
-#     print(e)
-#     print("Ошибка подключения к базе данных")
-
-
-
-# try:
-#     db = mysql.connector.connect(
-#         host="postige.mysql.tools",
-#         user="postige_appbot",
-#         passwd="X4cAi!f8!8",
-#         port="3306",
-#         database="postige_appbot"
-#     )
-#     print(db)
-#     cursor = db.cursor()
-# except Exception as e:
-#     print(e)
-#     print("Ошибка подключения к базе данных")
-
-
 
 # cursor.execute("CREATE DATABASE users")
 
@@ -144,7 +113,7 @@ except Exception as e:
 # 398051266
 
 global defalt_status
-defalt_status = 3
+defalt_status = 0
 global defalt_data
 defalt_data = 0
 
@@ -187,6 +156,19 @@ bot = telebot.TeleBot(constants.token)
 def handle_commanddd(message):
     chen_id_ = "(" + str(message.chat.id) + ",)"
     if str(chen_id_) not in str(id):
+        try:
+            db = mysql.connector.connect(
+                host="209.250.253.38",
+                user="gpbot_user",
+                passwd="DHUIEh#$4647",
+                port="3306",
+                database="gpbot_db"
+            )
+            print(db)
+            cursor = db.cursor()
+        except Exception as e:
+            print(e)
+            print("Ошибка подключения к базе данных")
         try:
             sql = "INSERT INTO user (id_user, status, offtime) VALUES (%s, %s, %s)"
             val = (message.chat.id, defalt_status, defalt_data)
@@ -234,6 +216,7 @@ def handle_commanddd(message):
     user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
     user_markup.row("✅ ДОБАВИТЬ", "❌ УДАЛИТЬ")
     user_markup.row("✍🏻 ВРУЧНУЮ", "📖 СПИСОК")
+    user_markup.row("👑 ТАРИФЫ", "🛎 ПОДДЕРЖКА")
     bot.send_message(message.chat.id, "Привет!", reply_markup=user_markup)
     try:
         file = open(str(message.chat.id) + "problem.txt")
@@ -263,6 +246,20 @@ def handle_commanddd(message):
             now_month2 = now2.month
             global now_day2
             now_day2 = now2.day
+
+            try:
+                db = mysql.connector.connect(
+                    host="209.250.253.38",
+                    user="gpbot_user",
+                    passwd="DHUIEh#$4647",
+                    port="3306",
+                    database="gpbot_db"
+                )
+                print(db)
+                cursor = db.cursor()
+            except Exception as e:
+                print(e)
+                print("Ошибка подключения к базе данных")
 
             nomber = 0
             try:
@@ -308,6 +305,19 @@ def handle_commanddd(message):
             print(str(do_kogda))
             print(str("(" + str(now_day) + ",)"))
             if int(lenf) > 1 and str(do_kogda) == str("(" + str(now_day2) + ",)"):
+                try:
+                    db = mysql.connector.connect(
+                        host="209.250.253.38",
+                        user="gpbot_user",
+                        passwd="DHUIEh#$4647",
+                        port="3306",
+                        database="gpbot_db"
+                    )
+                    print(db)
+                    cursor = db.cursor()
+                except Exception as e:
+                    print(e)
+                    print("Ошибка подключения к базе данных")
 
                 try:
                     sql = "UPDATE user SET status = %s WHERE offtime = %s"
@@ -327,6 +337,20 @@ def handle_commanddd(message):
                                                   "можно в разделе главного меню\n"
                                                   "👑 ТАРИФЫ\n")
             elif str(do_kogda) == str("(" + str(now_day2) + ",)"):
+
+                try:
+                    db = mysql.connector.connect(
+                        host="209.250.253.38",
+                        user="gpbot_user",
+                        passwd="DHUIEh#$4647",
+                        port="3306",
+                        database="gpbot_db"
+                    )
+                    print(db)
+                    cursor = db.cursor()
+                except Exception as e:
+                    print(e)
+                    print("Ошибка подключения к базе данных")
 
                 try:
                     sql1 = "UPDATE user SET status = %s WHERE offtime = %s"
@@ -536,6 +560,19 @@ def entr_status(message):
 def date_end(message):
     user_data_end = message.text
     try:
+        db = mysql.connector.connect(
+            host="209.250.253.38",
+            user="gpbot_user",
+            passwd="DHUIEh#$4647",
+            port="3306",
+            database="gpbot_db"
+        )
+        print(db)
+        cursor = db.cursor()
+    except Exception as e:
+        print(e)
+        print("Ошибка подключения к базе данных")
+    try:
         sql = "UPDATE user SET status = %s WHERE id_user = %s"
         val = (str(user_status), str(id_of_new_user))
         cursor.execute(sql, val)
@@ -576,6 +613,19 @@ def handle_command(message):
                                               "нажмите /start")
             bot.send_message(message.chat.id, message.chat.id)
         else:
+            try:
+                db = mysql.connector.connect(
+                    host="209.250.253.38",
+                    user="gpbot_user",
+                    passwd="DHUIEh#$4647",
+                    port="3306",
+                    database="gpbot_db"
+                )
+                print(db)
+                cursor = db.cursor()
+            except Exception as e:
+                print(e)
+                print("Ошибка подключения к базе данных")
             try:
                 nomber = 0
                 cursor.execute("SELECT id_user FROM user")
@@ -707,6 +757,19 @@ def handle_command(message):
     elif message.text == "👑 ТАРИФЫ":
         chen_id = "(" + str(message.chat.id) + ",)"
         nomber = 0
+        try:
+            db = mysql.connector.connect(
+                host="209.250.253.38",
+                user="gpbot_user",
+                passwd="DHUIEh#$4647",
+                port="3306",
+                database="gpbot_db"
+            )
+            print(db)
+            cursor = db.cursor()
+        except Exception as e:
+            print(e)
+            print("Ошибка подключения к базе данных")
         try:
             cursor.execute("SELECT id_user FROM user")
             result = cursor.fetchall()
