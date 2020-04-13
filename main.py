@@ -29,43 +29,9 @@ except Exception as e:
     print(e)
     print("Ошибка подключения к базе данных")
 
-
-# cursor.execute("CREATE DATABASE users")
-
-# cursor.execute("SHOW DATABASES")
-# for x in cursor:
-#   print(x)
-
-# cursor.execute("CREATE TABLE user (id_user INT, status INT)")
-
-# cursor.execute("SHOW TABLES")
-# for x in cursor:
-#   print(x)
-
-# cursor.execute("ALTER TABLE user ADD COLUMN (id INT AUTO_INCREMENT PRIMARY KEY, id_user INT UNIQUE)")
-
-
-# sql = "INSERT INTO user (id_user, status, offtime) VALUES (%s, %s, %s)"
-# val = (398051266, 2, "2020.04.22")
-# cursor.execute(sql, val)
-# db.commit()
-# print(cursor.rowcount, "Запись добавена")
-
-# sql = "INSERT INTO user (id_user, status, offtime) VALUES (%s, %s, %s)"
-# val = [
-#   (338051266, 2, "2020.04.22"),
-#   (394051266, 2, "2020.04.22"),
-#   (398071266, 2, "2020.04.22"),
-#   (378058266, 2, "2020.04.22"),
-# ]
-# cursor.executemany(sql, val)
-# db.commit()
-# print(cursor.rowcount, "was inserted.")
-
 id = []
 status = []
 day_off = []
-
 
 try:
     cursor.execute("SELECT * FROM user")
@@ -99,18 +65,6 @@ try:
 except Exception as e:
     print(e)
     print("Ошибка выбора элементов с базы данных(перед старт)")
-# proxies = {
-#     "http": "http://10.10.1.10:3128",
-#     "https": "http://10.10.1.10:1080",
-# }
-#
-# requests.get("http://www.google.com/", proxies=proxies)
-
-# global id_of_new_user
-# id_of_new_user = 10
-# global user_status
-# user_status = 10
-# 398051266
 
 global defalt_status
 defalt_status = 0
@@ -119,23 +73,6 @@ defalt_data = 0
 
 cheker = 0
 bot = telebot.TeleBot(constants.token)
-
-
-# try:
-#     r = requests.get("https://docs.google.com/spreadsheets/d/1OF_eQiUhIGTtpkB5e9qX8woUVLS4sQeVzvJt_CeuIUw/edit?usp=sharing")
-#     html = BS(r.content, "html.parser")
-#     # print(html)
-# except Exception as e:
-#     print(e)
-# for el in html.select(".cell-input"):
-#     print(html)
-#     print("fghjkl")
-#     users = el.select(".cell-input.editable")[0].text
-#     id.append(users)
-#     print(users)
-
-
-# s = sched.scheduler(time.time, time.sleep)
 
 
 # def thread(my_func):
@@ -220,10 +157,13 @@ def handle_commanddd(message):
     bot.send_message(message.chat.id, "Привет!", reply_markup=user_markup)
     try:
         file = open(str(message.chat.id) + "problem.txt")
+        file = open(str(message.chat.id) + "url.txt")
     except Exception as e:
         print(e)
         kreate = open(str(message.chat.id) + 'problem.txt', 'tw', encoding='utf-8')
         kreate.close()
+        kreate2 = open(str(message.chat.id) + 'url.txt', 'tw', encoding='utf-8')
+        kreate2.close()
     chen_id = "(" + str(message.chat.id) + ",)"
     print(chen_id)
     print(id)
@@ -283,7 +223,7 @@ def handle_commanddd(message):
                     # print(x)
                     day_off.append(x)
                 print(day_off)
-                global  do_kogda
+                global do_kogda
                 do_kogda = day_off[int(nomber)]
                 lenf = sum(1 for line in open(str(message.chat.id) + 'problem.txt', 'r'))
 
@@ -397,7 +337,6 @@ def handle_commanddd(message):
             else:
                 print("Oll good")
 
-
         chek_data()
 
         # def do_my_cod(sc):
@@ -410,10 +349,6 @@ def handle_commanddd(message):
                 print("Ошибка доступа к файлу")
             if int(lenf) > 1 and str(do_kogda) == str("(" + str(now_day2) + ",)"):
                 print("Срок действия тарифа истек")
-            elif now_status2 == (3,):
-                print("Статус ВИП")
-            elif now_status2 == (2,):
-                print("Статус премиум+")
             elif now_status2 == (1,) and lenf > 5:
                 print("Срок действия тарифа истек/лишнее приложение")
             elif now_status2 == (0,) and lenf > 1:
@@ -423,12 +358,15 @@ def handle_commanddd(message):
                     print("Doing ", message.chat.id)
                     list_of_apps = open(str(message.chat.id) + 'problem.txt', 'r').readlines()
                     leng = len(list_of_apps)
-                    print(leng)
+                    list_of_url = open(str(message.chat.id) + 'url.txt', 'r').readlines()
+                    leng_url = len(list_of_url)
+                    print(leng_url)
                     # if leng == 0:
                     #     print("Список пуст,я жду")
                     # else:
                     # list_of_apps.clear() не помню зачем надо
                     for nambers in range(leng):
+                        print(nambers, "nambers")
                         with open(str(message.chat.id) + 'problem.txt', 'r') as f:
                             for i in range(int(nambers)):
                                 f.readline()
@@ -436,87 +374,66 @@ def handle_commanddd(message):
                             print(x)
                             f.close()
                             try:
-                                # r = requests.get("https://play.google.com/store/search?q=" + str(x))
                                 r = requests.get("https://play.google.com/store/search?q=" + str(x) + "&c=apps")
                                 html = BeautifulSoup(r.content, "html.parser")
                             except Exception as e2:
                                 print(e2)
                                 print("Совпадений нет,проверте правильность введения названия")
-                                # bot.send_message(message.chat.id, "Совпадений нет,проверте правильность введения названия")
-                            n = 0
-                            mass = []
-                            namber_of_el = 0
-                            for el in html.select(".RZEgze"):
-                                # print(el)
-                                n = n + 1
-                                t_min = el.select(".WsMG1c.nnK0zc")[0].text
-                                # k = [t_min for i in range(n)]
-                                mass.append(t_min + "\n")
-                                # t_min2 = el.select(".temperature .min")[n].text
-                                # print(n, t_min)
-                            print(mass)
-                            try:
-                                namber_of_el = mass.index(str(x))
-                            except Exception as e2:
-                                print(e2)
-                                print("........Приложение удалено!........ ", x)
-                                bot.send_message(message.chat.id, "Приложение перестало быть доступным для загрузки")
-                                bot.send_message(message.chat.id, "Мы очищаем список ваших приложений от недоступного "
-                                                                  "приложения")
-                                try:
-                                    with open(str(message.chat.id) + 'problem.txt', 'r') as o:
-                                        data = o.readlines()
-                                    data = filter(lambda line: x not in line, data)
-                                    with open(str(message.chat.id) + 'problem.txt', 'w') as o:
-                                        o.write("".join(data))
-                                        bot.send_message(message.chat.id, "Приложение удалено из вашего списка")
-                                        bot.send_message(message.chat.id, x)
-                                except Exception as e2:
-                                    print(e2)
-                                    print("........Ошибка,удаления, проверте правильность ввода........")
-                                    bot.send_message(message.chat.id,
-                                                     "Невозможно удалить приложение, проверьте правильность его названия")
+                                bot.send_message(message.chat.id, "Совпадений нет,проверте правильность введения названия")
 
-                            try:
-                                print(mass[int(namber_of_el)], " Элемент под этим номером")
-                            except Exception as e2:
-                                print(e2)
-                                print("........Google Play ничего не нашел ........ ", x)
-                                bot.send_message(message.chat.id,
-                                                 "Такого приложения не найдено "
-                                                 "в Google Play")
-                            try:
-                                if mass[int(namber_of_el)] == str(x):
-                                    print("........Нашел приложение!........ ", x)
-                                    # bot.send_message(message.chat.id, "........Нашел приложение!........")
-                                    # bot.send_message(message.chat.id, x)
-                            except Exception as e1:
-                                print(e1)
-                                print("........Скорей всего оно удалено ........ ", x)
-                                bot.send_message(message.chat.id,
-                                                 "Похоже что приложение больше недоступно :(")
-                                bot.send_message(message.chat.id, x)
+                            massiv_url = []
+                            with open(str(message.chat.id) + 'url.txt', 'r') as p:
+                                for i in range(int(nambers)):
+                                    p.readline()
+                                y = p.readline()
+                                print(y)
+                                p.close()
+                                try:
+                                    for el in html.find_all('img'):
+                                        link = el['data-src']
+                                        # link2 = str(link)
+                                        massiv_url.append(link+"\n")
+                                    print(massiv_url)
+                                except Exception as e:
+                                    print(e)
+                                if y not in massiv_url:
+                                    print("........Этого приложения нету в Google Play........")
+                                    bot.send_message(message.chat.id, "Приложение перестало быть доступным для загрузки")
+                                    bot.send_message(message.chat.id, "Мы очищаем список ваших приложений от недоступного "
+                                                                      "приложения")
+                                    try:
+                                        with open(str(message.chat.id) + 'problem.txt', 'r') as o:
+                                            data = o.readlines()
+                                        data = filter(lambda line: x not in line, data)
+                                        with open(str(message.chat.id) + 'problem.txt', 'w') as o:
+                                            o.write("".join(data))
+
+                                        with open(str(message.chat.id) + 'url.txt', 'r') as m:
+                                            data2 = m.readlines()
+                                        data2 = filter(lambda line: y not in line, data2)
+                                        with open(str(message.chat.id) + 'url.txt', 'w') as m:
+                                            m.write("".join(data2))
+                                            bot.send_message(message.chat.id, "Приложение удалено из вашего списка")
+                                            bot.send_message(message.chat.id, x)
+                                    except Exception as e2:
+                                        print(e2)
+                                        print("........Ошибка,удаления, проверте правильность ввода........")
+                                        bot.send_message(message.chat.id,
+                                                             "Невозможно удалить приложение, проверьте правильность его названия")
+                                else:
+                                    print("Приложение есть,все хорошо!")
                 except Exception as e2:
                     print(e2)
                     print("........Критическая ошибка при проверки, обратитесь в поддержку........ " + x)
                     bot.send_message(message.chat.id,
-                                     "Возникла ошибка при работе, обратитесь в поддержку")
+                                         "Возникла ошибка при работе, обратитесь в поддержку")
                 # s.enter(15, 1, do_my_cod, (sc,))
 
         do_my_cod()
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------
-# t = Timer(10.0, do_my_cod)
-# s.enter(15, 1, do_my_cod, (s,))
-# s.run()
 
-
-# @bot.message_handler(commands=["stop"])
-# def handle_command(message):
-# hid_markup = telebot.types.ReplyKeyboardRemove()
-# bot.send_message(message.chat.id, "Заходи еще!"
-# "Уведомления отключены, информация удалена!", reply_markup=hid_markup)\
 
 # --------------------------------------------------------------------------admin------------------------------------------------------------------------------------
 @bot.message_handler(commands=["admin"])
@@ -598,10 +515,13 @@ def handle_command(message):
     if message.text == "✅ ДОБАВИТЬ":
         try:
             file = open(str(message.chat.id) + 'problem.txt')
+            file = open(str(message.chat.id) + 'url.txt')
         except Exception as e:
             print(e)
             kreate = open(str(message.chat.id) + 'problem.txt', 'tw', encoding='utf-8')
             kreate.close()
+            kreate2 = open(str(message.chat.id) + 'url.txt', 'tw', encoding='utf-8')
+            kreate2.close()
         chen_id = "(" + str(message.chat.id) + ",)"
         print(chen_id)
         print(id)
@@ -831,9 +751,9 @@ def handle_command(message):
                                           "2 - 👑 ПРЕМИУМ +: 10 USD/месяц, отслеживание безлимитного\n"
                                           "количества приложений\n"
                                           "\n"
-                                          # "3- 👑 ВИП 👑: Отслеживание безлимитного\n"
-                                          # "количества приложений.\n"
-                                          # "\n"
+        # "3- 👑 ВИП 👑: Отслеживание безлимитного\n"
+        # "количества приложений.\n"
+        # "\n"
                                           "Для заказа/изменения тарифа, пишите:\n"
                                           "@rallen \n"
                                           f'и сообщите ваш ID: {message.chat.id}')
@@ -859,10 +779,12 @@ def hello(message):
             bot.send_message(message.chat.id, "Мы не смогли найти такого приложения,\n"
                                               "проверьте правильность его названия включая регист!.")
         n = 0
+        a = 0
         k = 0
         massiv = []
+        global massivimg
         massivimg = []
-        namber_of_element = 0
+        namber_of_element = []
         namber_of_img = []
         for el in html.select(".RZEgze"):
             # print(el)
@@ -874,63 +796,77 @@ def hello(message):
             # print(n, t_min)
         print(massiv)
         try:
-            namber_of_element = massiv.index(str(name_of_app))
+            for nom in massiv:
+                if nom == str(name_of_app):
+                    namber_of_element.append(a)
+                    print(a, nom)
+                a = a + 1
+            print(namber_of_element)
+            # namber_of_element = massiv.index(str(name_of_app))
         except Exception as e:
             print(e)
+            print("........Ошибка Google Play........")
+        if str(message.text) not in massiv:
             print("........Этого приложения нету в Google Play........")
             bot.send_message(message.chat.id, "Такого приложения не найдено в Google Play")
-        print(massiv[int(namber_of_element)], " Элемент под этим номером")
-        if massiv[int(namber_of_element)] == str(name_of_app):
-            try:
-                for el in html.find_all('img'):
-                    link = el['data-src']
-                    k = k + 1
-                    link2 = str(link)
-                    massivimg.append(link2)
-                    # t_min2 = el.select(".temperature .min")[n].text
-                    # print(k, link2)
-            except Exception as e:
-                print(e)
-            print(massivimg)
-            url = massivimg[int(1)]
-            # url = "http://risovach.ru/upload/2014/02/mem/muzhik-bleat_43233947_orig_.jpg"
-            img = urllib.request.urlopen(url).read()
-            out = open("img.jpg", "wb")
-            out.write(img)
-            out.close()
-            img2 = open('img.jpg', 'rb')
-            bot.send_photo(message.chat.id, img2)
-            bot.send_message(message.chat.id, name_of_app)
-            # print(massiv.count(str(name_of_app)))
-            open(str(message.chat.id) + 'problem.txt', 'a').write(message.text + "\n")
-            bot.send_message(message.chat.id, 'Ваше приложение успешно добавлено :)')
+        else:
+            for app in namber_of_element:
+                print(app)
+                print(massiv[app])
+                if massiv[app] == str(name_of_app):
+                    try:
+                        for el in html.find_all('img'):
+                            link = el['data-src']
+                            k = k + 1
+                            link2 = str(link)
+                            massivimg.append(link2)
+                            # t_min2 = el.select(".temperature .min")[n].text
+                            # print(k, link2)
+                    except Exception as e:
+                        print(e)
+                    print(massivimg)
+                    url = massivimg[app * 3]
+                    # url = "http://risovach.ru/upload/2014/02/mem/muzhik-bleat_43233947_orig_.jpg"
+                    img = urllib.request.urlopen(url).read()
+                    out = open("img.jpg", "wb")
+                    out.write(img)
+                    out.close()
+                    img2 = open('img.jpg', 'rb')
+                    bot.send_photo(message.chat.id, img2)
+                    bot.send_message(message.chat.id,
+                                     f'№: {app}\n'
+                                     f'{name_of_app}')
+                    global reset_name_of_app
+                    reset_name_of_app = name_of_app
+            sent = bot.send_message(message.chat.id, 'Введите номер (№) вашего приложения\n'
+                                                     'из предложенного выше списка\n'
+                                                     'Например:1 или 8\n')
+            bot.register_next_step_handler(sent, addAppImg)
     except Exception as e:
         print(e)
         print("........Ошибка,попробуйте снова........")
         bot.send_message(message.chat.id, "Упс, произошла какая-то ошибка, попробуйте еще раз.")
 
 
+def addAppImg(message):
+    try:
+        open(str(message.chat.id) + 'problem.txt', 'a').write(reset_name_of_app + "\n")
+        open(str(message.chat.id) + 'url.txt', 'a').write(massivimg[int(message.text)*3] + "\n")
+        url = massivimg[int(message.text)*3]
+        img = urllib.request.urlopen(url).read()
+        out = open("img.jpg", "wb")
+        out.write(img)
+        out.close()
+        img2 = open('img.jpg', 'rb')
+        bot.send_photo(message.chat.id, img2)
+        bot.send_message(message.chat.id, 'Ваше приложение успешно добавлено :)')
+    except Exception as e:
+        print(e)
+        print("........Ошибка,неверный ввод номера приложения........")
+        bot.send_message(message.chat.id, "Упс, вы ввели неверный номер приложения,попробуйте снова.")
+
+
 # --------------------------------------------------------------✍🏻ВРУЧНУЮ------------------------------------------------------------------------------------------------
-# @bot.message_handler(content_types=["text"])
-# def handle_command(message):
-#     if message.text == "✍🏻 ВРУЧНУЮ":
-#         try:
-#             file = open(str(message.chat.id) + 'onetestapp.txt')
-#         except Exception as e:
-#             print(e)
-#             kreate = open(str(message.chat.id) + 'onetestapp.txt', 'tw', encoding='utf-8')
-#             kreate.close()
-#         if message.chat.id not in id:
-#             bot.send_message(message.chat.id, "У вас нет доступа к данному боту\n"
-#                                               "Обратитесь к разработчику\n"
-#                                               "@andron3239 и сообщите ваш ID:\n")
-#             bot.send_message(message.chat.id, message.chat.id)
-#         else:
-#             sent = bot.send_message(message.chat.id, 'Я проверю это приложение один раз в реальном времени\n'
-#                                                      'Оно не будет занесено в список ваших приложений и не будет '
-#                                                      'проверяться\n\n '
-#                                                      'Введите название приложения учитывая реристры и специальные знаки!')
-#             bot.register_next_step_handler(sent, chek_app)
 
 
 def chek_app(message):
@@ -946,12 +882,14 @@ def chek_app(message):
         except Exception as e:
             print(e)
             print("Совпадений нет,проверте правильность введения названия")
-            bot.send_message(message.chat.id, "Мы не смогли найти такого приложения, проверьте правильность его названия включая регистр.")
+            bot.send_message(message.chat.id,
+                             "Мы не смогли найти такого приложения, проверьте правильность его названия включая регистр.")
         n = 0
+        a = 0
         k = 0
         massiv = []
         massivimg = []
-        namber_of_element = 0
+        namber_of_element = []
         namber_of_img = []
         for el in html.select(".RZEgze"):
             # print(el)
@@ -963,36 +901,48 @@ def chek_app(message):
             # print(n, t_min)
         print(massiv)
         try:
-            namber_of_element = massiv.index(str(name_of_app))
+            if name_of_app not in massiv:
+                bot.send_message(message.chat.id, "Мы не смогли найти такого приложения, скорей всего оно удалено")
+            else:
+                for nom in massiv:
+                    if nom == str(name_of_app):
+                        namber_of_element.append(a)
+                        print(a, nom)
+                    a = a + 1
+                print(namber_of_element)
+                # namber_of_element = massiv.index(str(name_of_app))
         except Exception as e:
             print(e)
-            print("........Приложение удалено!........")
-            bot.send_message(message.chat.id, "Приложение удалено")
-        print(massiv[int(namber_of_element)], " Элемент под этим номером")
-        if massiv[int(namber_of_element)] == str(name_of_app):
-            try:
-                for el in html.find_all('img'):
-                    link = el['data-src']
-                    k = k + 1
-                    link2 = str(link)
-                    massivimg.append(link2)
-                    # t_min2 = el.select(".temperature .min")[n].text
-                    # print(k, link2)
-            except Exception as e:
-                print(e)
-            print(massivimg)
-            url = massivimg[int(1)]
-            # url = "http://risovach.ru/upload/2014/02/mem/muzhik-bleat_43233947_orig_.jpg"
-            img = urllib.request.urlopen(url).read()
-            out = open("img.jpg", "wb")
-            out.write(img)
-            out.close()
-            img2 = open('img.jpg', 'rb')
-            print("........Нашел приложение!........")
-            bot.send_message(message.chat.id, "Мы нашли такое приложение")
-            bot.send_photo(message.chat.id, img2)
-            bot.send_message(message.chat.id, name_of_app)
-        # print(massiv.count(str(name_of_app)))
+            print("........Ошибка........")
+            bot.send_message(message.chat.id, "Ошибка проверки,обратитесь в поддержку!")
+        # print(massiv[int(namber_of_element)], " Элемент под этим номером")
+        for app in namber_of_element:
+            print(app)
+            print(massiv[app])
+            if massiv[app] == str(name_of_app):
+                try:
+                    for el in html.find_all('img'):
+                        link = el['data-src']
+                        k = k + 1
+                        link2 = str(link)
+                        massivimg.append(link2)
+                        # t_min2 = el.select(".temperature .min")[n].text
+                        # print(k, link2)
+                except Exception as e:
+                    print(e)
+                print(massivimg)
+                url = massivimg[app * 3]
+                # url = "http://risovach.ru/upload/2014/02/mem/muzhik-bleat_43233947_orig_.jpg"
+                img = urllib.request.urlopen(url).read()
+                out = open("img.jpg", "wb")
+                out.write(img)
+                out.close()
+                img2 = open('img.jpg', 'rb')
+                print("........Нашел приложение!........")
+                bot.send_message(message.chat.id, "Мы нашли такое приложение")
+                bot.send_photo(message.chat.id, img2)
+                bot.send_message(message.chat.id, name_of_app)
+            # print(massiv.count(str(name_of_app)))
     except Exception as e:
         print(e)
         print("........Ошибка,попробуйте снова........")
@@ -1000,77 +950,48 @@ def chek_app(message):
                                           "в Google Play")
 
 
-# --------------------------------------------------------------------📖СПИСОК------------------------------------------------------------------------------------------
-# @bot.message_handler(commands=["seemyapps"])
-# def handle_command(message):
-#     if message.chat.id not in id:
-#         bot.send_message(message.chat.id, "В данный момент Вы не можете использовать бота\n"
-#                                           "Обратитесь к разработчику\n"
-#                                           "@rallen, сообщите ваш ID:\n"
-#                                           "После активации аккаунта\n"
-#                                           "нажмите /start")
-#         bot.send_message(message.chat.id, message.chat.id)
-#     else:
-#         try:
-#             list_of_apps = open(str(message.chat.id) + 'problem.txt', 'r').read()
-#             bot.send_message(message.chat.id, 'Понял,обрабатываю\n'
-#                                               'Подожди немного!\n')
-#             bot.send_message(message.chat.id, list_of_apps)
-#             print(list_of_apps)
-#         except Exception as e:
-#             print(e)
-#             print("........Ваш список пуст........")
-#             bot.send_message(message.chat.id, "........Ваш список пуст........")
-
-
-# --------------------------------------------------------------------------❌УДАЛИТЬ------------------------------------------------------------------------------------
-# @bot.message_handler(content_types=["text"])
-# def handle_commandsds(message):
-#     if message.text == "❌ УДАЛИТЬ":
-#         if message.chat.id not in id:
-#             bot.send_message(message.chat.id, "У вас нет доступа к данному боту\n"
-#                                               "Обратитесь к разработчику\n"
-#                                               "@andron3239 и сообщите ваш ID:\n")
-#             bot.send_message(message.chat.id, message.chat.id)
-#         else:
-#             try:
-#                 try:
-#                     file = open(str(message.chat.id) + "problem.txt")
-#                 except Exception as e:
-#                     print(e)
-#                     kreate = open(str(message.chat.id) + 'problem.txt', 'tw', encoding='utf-8')
-#                     kreate.close()
-#                 sent = bot.send_message(message.chat.id,
-#                                         'Введите название приложения учитывая реристры и специальные знаки!\n\n'
-#                                         '                Внимание!!! \n'
-#                                         'Я не отслеживаю правильность введения названия в даном разделе'
-#                                         'рекомендую проверить удаление командой: \n'
-#                                         '/seemyapps \n'
-#                                         'после завершения удаления')
-#                 bot.register_next_step_handler(sent, enter_app_to_dell)
-#             except Exception as e:
-#                 print(e)
-#                 print("........Ошибка,удаления, проверте правильность ввода........")
-#                 bot.send_message(message.chat.id, "........Ошибка,удаления, проверте правильность ввода........")
+# --------------------------------------------------------------------------❌УДАЛИТЬ------------------------------------------------------------------------------------          bot.send_message(message.chat.id, "........Ошибка,удаления, проверте правильность ввода........")
 
 
 def enter_app_to_dell(message):
     try:
+        schet = 0
         with open(str(message.chat.id) + 'problem.txt', 'r') as f:
             data = f.readlines()
             print(data)
             if str(message.text + "\n") not in data:
                 bot.send_message(message.chat.id, "Такого приложения в вашем списке нет")
             else:
-                data = filter(lambda line: message.text not in line, data)
-                print(data)
-                with open(str(message.chat.id) + 'problem.txt', 'w') as f:
-                    f.write("".join(data))
-                    bot.send_message(message.chat.id, "Приложение удалено из вашего списка")
+                for namber in data:
+                    x = namber
+                    print(x, "x")
+                    if x == str(message.text+"\n"):
+                        with open(str(message.chat.id) + 'url.txt', 'r') as p:
+                            for i in range(int(schet)):
+                                p.readline()
+                            y = p.readline()
+                            print(y)
+                            p.close()
+                            with open(str(message.chat.id) + 'problem.txt', 'r') as o:
+                                data = o.readlines()
+                            data = filter(lambda line: x not in line, data)
+                            with open(str(message.chat.id) + 'problem.txt', 'w') as o:
+                                o.write("".join(data))
+
+                            with open(str(message.chat.id) + 'url.txt', 'r') as m:
+                                data2 = m.readlines()
+                            data2 = filter(lambda line: y not in line, data2)
+                            with open(str(message.chat.id) + 'url.txt', 'w') as m:
+                                m.write("".join(data2))
+                                bot.send_message(message.chat.id, "Приложение удалено из вашего списка")
+                                bot.send_message(message.chat.id, x)
+                    else:
+                        schet = schet+1
     except Exception as e:
         print(e)
         print("........Ошибка,удаления, проверте правильность ввода........")
-        bot.send_message(message.chat.id, "Мы не нашли совпадений, проверте правильность введения названия учитывая регистр")
+        bot.send_message(message.chat.id,
+                         "Мы не нашли совпадений, проверте правильность введения названия учитывая регистр")
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------
